@@ -12,13 +12,13 @@ const webpackDevClientEntry = require.resolve('./config/webpackHotDevClient');
 const appDirectory = path.resolve(__dirname);
 
 const nodeModuleImages = [
-  //   '@react-navigation/elements',
-  //   'react-native-paper',
+  '@react-navigation/elements',
+  'react-native-paper',
   // ...additional
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const nodeModulesMjs = [
-  //   '@aws-amplify',
+  '@aws-amplify',
   //   'aws-appsync',
   //   'aws-appsync-auth-link',
   // ...additional
@@ -26,9 +26,9 @@ const nodeModulesMjs = [
 
 const compileNodeModules = [
   //   'react-native-lightbox',
-  //   '@aws-amplify',
+  '@aws-amplify',
   //   'react-native-parsed-text',
-  //   'react-native-vector-icons',
+  'react-native-vector-icons',
   //   'react-native-gesture-handler',
   //   'react-native-reanimated',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
@@ -139,23 +139,23 @@ module.exports = function (webpackEnv) {
                 },
               },
             },
-            // {
-            //   test: /\.ttf$/,
-            //   include: [
-            //     path.resolve(
-            //       __dirname,
-            //       'node_modules/react-native-vector-icons',
-            //     ),
-            //     path.resolve(__dirname, 'src/assets/fonts'),
-            //   ],
-            //   use: {
-            //     loader: 'file-loader',
-            //     options: {
-            //       name: '[name].[ext]',
-            //       esModule: false,
-            //     },
-            //   },
-            // },
+            {
+              test: /\.ttf$/,
+              include: [
+                path.resolve(
+                  __dirname,
+                  'node_modules/react-native-vector-icons',
+                ),
+                //       path.resolve(__dirname, 'src/assets/fonts'),
+              ],
+              use: {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                  esModule: false,
+                },
+              },
+            },
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: [path.resolve(__dirname, 'src')],
@@ -194,10 +194,7 @@ module.exports = function (webpackEnv) {
                     '@babel/preset-react',
                     'module:metro-react-native-babel-preset',
                   ],
-                  plugins: [
-                    'react-native-web',
-                    //   'react-native-paper/babel'
-                  ],
+                  plugins: ['react-native-web', 'react-native-paper/babel'],
                   cacheDirectory: true,
                   cacheCompression: false,
                   compact: false,
