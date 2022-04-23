@@ -1,0 +1,37 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-veggies-dev-151427-authRole",
+      "UnauthRoleArn": "arn:aws:iam::318564174151:role/amplify-veggies-dev-151427-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::318564174151:role/amplify-veggies-dev-151427-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-veggies-dev-151427-deployment",
+      "UnauthRoleName": "amplify-veggies-dev-151427-unauthRole",
+      "StackName": "amplify-veggies-dev-151427",
+      "StackId": "arn:aws:cloudformation:eu-west-1:318564174151:stack/amplify-veggies-dev-151427/afc48360-c30f-11ec-b424-026bca5d69ed",
+      "AmplifyAppId": "d1uzshmek9lg0p"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1uzshmek9lg0p",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "veggiesauth": {}
+      },
+      "function": {
+        "veggielambda": {
+          "test": "testval",
+          "deploymentBucketName": "amplify-veggies-dev-151427-deployment",
+          "s3Key": "amplify-builds/veggielambda-78506449734841794a38-build.zip"
+        },
+        "veggiescrudlambda": {
+          "deploymentBucketName": "amplify-veggies-dev-151427-deployment",
+          "s3Key": "amplify-builds/veggiescrudlambda-7735456a485a7368686a-build.zip"
+        }
+      }
+    }
+  }
+}

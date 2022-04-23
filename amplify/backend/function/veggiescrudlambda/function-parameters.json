@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "veggiecontentstorage": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

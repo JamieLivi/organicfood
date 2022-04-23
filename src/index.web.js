@@ -1,6 +1,9 @@
 import {AppRegistry} from 'react-native';
-import {name as appName} from '../app.json';
+// import {name as appName} from '../app.json';
 import App from './App';
+
+const appName = 'interesting-veg';
+
 if (module.hot) {
   module.hot.accept();
 }

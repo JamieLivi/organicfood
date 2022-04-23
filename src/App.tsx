@@ -19,6 +19,10 @@ import {
 } from 'react-native-paper';
 import VeggieDetailsScreen from './screens/VeggieDetailsScreen';
 import VeggieListScreen from './screens/VeggieListScreen';
+import Amplify from '@aws-amplify/core';
+import awsConfig from './aws-exports';
+
+Amplify.configure(awsConfig);
 
 const Stack = createStackNavigator();
 

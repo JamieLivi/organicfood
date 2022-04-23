@@ -1,0 +1,14 @@
+{
+  "resourceName": "veggietable",
+  "tableName": "veggietable",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "date",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
