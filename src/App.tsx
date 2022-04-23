@@ -8,6 +8,7 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
@@ -16,6 +17,10 @@ import {
   DarkTheme as PaperDarkTheme,
   DefaultTheme as PaperLightTheme,
 } from 'react-native-paper';
+import VeggieDetailsScreen from './screens/VeggieDetailsScreen';
+import VeggieListScreen from './screens/VeggieListScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [theme, setTheme] = useState(DefaultTheme);
@@ -45,20 +50,21 @@ const App = () => {
         }}
         ref={navigationRef}
         theme={theme}>
-        <View style={styles.container}>
-          <Text>Veggies</Text>
-        </View>
+        <Stack.Navigator initialRouteName="VeggieList">
+          <Stack.Screen
+            name="VeggieList"
+            options={{title: 'Veggies'}}
+            component={VeggieListScreen}
+          />
+          <Stack.Screen
+            name="VeggieDetails"
+            options={{title: 'Details'}}
+            component={VeggieDetailsScreen}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;
