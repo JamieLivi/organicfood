@@ -14,6 +14,7 @@ const appDirectory = path.resolve(__dirname);
 const nodeModuleImages = [
   '@react-navigation/elements',
   'react-native-paper',
+  'aws-amplify-react-native',
   // ...additional
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
@@ -27,6 +28,8 @@ const nodeModulesMjs = [
 const compileNodeModules = [
   //   'react-native-lightbox',
   '@aws-amplify',
+  'aws-amplify',
+  'aws-amplify-react-native',
   //   'react-native-parsed-text',
   'react-native-vector-icons',
   //   'react-native-gesture-handler',
@@ -138,6 +141,22 @@ module.exports = function (webpackEnv) {
                   esModule: false,
                 },
               },
+            },
+            {
+              test: /\.css$/,
+              use: [
+                {
+                  loader: 'style-loader',
+                },
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: true,
+                    // localIdentName:
+                    //   '[path]___[name]__[local]___[hash:base64:5]',
+                  },
+                },
+              ],
             },
             {
               test: /\.ttf$/,

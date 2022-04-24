@@ -20,17 +20,6 @@
       },
       "auth": {
         "veggiesauth": {}
-      },
-      "function": {
-        "veggielambda": {
-          "test": "testval",
-          "deploymentBucketName": "amplify-veggies-dev-151427-deployment",
-          "s3Key": "amplify-builds/veggielambda-78506449734841794a38-build.zip"
-        },
-        "veggiescrudlambda": {
-          "deploymentBucketName": "amplify-veggies-dev-151427-deployment",
-          "s3Key": "amplify-builds/veggiescrudlambda-7735456a485a7368686a-build.zip"
-        }
       }
     }
   }

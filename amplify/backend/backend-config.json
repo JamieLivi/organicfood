@@ -51,81 +51,41 @@
     }
   },
   "storage": {
-    "veggiecontentstorage": {
+    "veggiestorage": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
-    },
-    "veggietable": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
     }
   },
-  "function": {
-    "veggielambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "veggiecontentstorage",
-          "attributes": [
-            "BucketName"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "veggietable",
-          "attributes": [
-            "Name",
-            "Arn",
-            "StreamArn"
-          ]
-        }
-      ]
-    },
-    "veggiescrudlambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "veggietable",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        },
-        {
-          "category": "storage",
-          "resourceName": "veggiecontentstorage",
-          "attributes": [
-            "BucketName"
-          ]
-        }
-      ]
-    }
-  },
+  "function": {},
   "api": {
-    "veggiesrestapi": {
-      "service": "API Gateway",
+    "veggies": {
+      "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "veggiescrudlambda",
+          "category": "auth",
+          "resourceName": "veggiesauth",
           "attributes": [
-            "Name",
-            "Arn"
+            "UserPoolId"
           ]
         }
-      ]
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authveggiesauth"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        }
+      }
     }
   }
 }

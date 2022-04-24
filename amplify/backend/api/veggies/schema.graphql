@@ -1,0 +1,9 @@
+type Veggie @model {
+  id: ID!
+  name: String!
+  dateAdded: String
+  subtitle: String
+  info: String
+  image: String
+  fact: String
+}

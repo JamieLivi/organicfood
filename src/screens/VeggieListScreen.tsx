@@ -1,7 +1,8 @@
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {List, Text} from 'react-native-paper';
+import {Button, List, Text} from 'react-native-paper';
+import isWeb from '../utils/isWeb';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -22,9 +23,16 @@ const VeggieListScreen = ({navigation, route}: Props) => {
     return <List.Item onPress={onPress} title={item.name} />;
   };
   return (
-    <View style={styles.container}>
-      <FlatList data={tempData} renderItem={renderItem} />
-    </View>
+    <>
+      <View style={styles.container}>
+        <FlatList data={tempData} renderItem={renderItem} />
+      </View>
+      <View>
+        {isWeb && (
+          <Button onPress={() => navigation.navigate('Admin')}>Admin</Button>
+        )}
+      </View>
+    </>
   );
 };
 

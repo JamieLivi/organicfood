@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {
   Provider as PaperProvider,
   Text,
@@ -19,12 +19,41 @@ import {
 } from 'react-native-paper';
 import VeggieDetailsScreen from './screens/VeggieDetailsScreen';
 import VeggieListScreen from './screens/VeggieListScreen';
-import Amplify from '@aws-amplify/core';
+// import Amplify from '@aws-amplify/core';
+// import Auth from '@aws-amplify/auth';
 import awsConfig from './aws-exports';
+// import AdminStack from './navigation/AdminStack';
+import isWeb from './utils/isWeb';
+// import AdminScreen from './screens/AdminScreen';
+import {Amplify} from 'aws-amplify';
+import AdminStack from './navigation/AdminStack';
+import WebStyles from './utils/WebStyles';
+import ToastState from './context/ToastState';
 
-Amplify.configure(awsConfig);
+export type RootStackParamList = {
+  VeggieList: undefined;
+  VeggieDetails: {id: string};
+  Admin: any;
+};
 
-const Stack = createStackNavigator();
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+
+// Amplify.configure(awsConfig);
+// Auth.configure(awsConfig);
+
+Amplify.configure({
+  ...awsConfig,
+  Analytics: {
+    disabled: true,
+  },
+});
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   const [theme, setTheme] = useState(DefaultTheme);
@@ -46,27 +75,35 @@ const App = () => {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <NavigationContainer
-        fallback={<Text>Loading…</Text>}
-        documentTitle={{
-          formatter: (options, route) =>
-            `${options?.title ?? route?.name} - Interesting Veggies`,
-        }}
-        ref={navigationRef}
-        theme={theme}>
-        <Stack.Navigator initialRouteName="VeggieList">
-          <Stack.Screen
-            name="VeggieList"
-            options={{title: 'Veggies'}}
-            component={VeggieListScreen}
-          />
-          <Stack.Screen
-            name="VeggieDetails"
-            options={{title: 'Details'}}
-            component={VeggieDetailsScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <WebStyles />
+      <ToastState>
+        <NavigationContainer
+          fallback={<Text>Loading…</Text>}
+          documentTitle={{
+            formatter: (options, route) =>
+              `${options?.title ?? route?.name} - Interesting Veggies`,
+          }}
+          ref={navigationRef}
+          theme={theme}>
+          <Stack.Navigator initialRouteName="VeggieList">
+            <Stack.Screen
+              name="VeggieList"
+              options={{title: 'Veggies'}}
+              component={VeggieListScreen}
+            />
+            <Stack.Screen
+              name="VeggieDetails"
+              options={{title: 'Details'}}
+              component={VeggieDetailsScreen}
+            />
+            <Stack.Screen
+              name="Admin"
+              options={{title: 'Admin', headerShown: false}}
+              component={AdminStack}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ToastState>
     </PaperProvider>
   );
 };

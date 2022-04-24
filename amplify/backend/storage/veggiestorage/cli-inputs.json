@@ -1,0 +1,15 @@
+{
+  "resourceName": "veggiestorage",
+  "policyUUID": "15c98a1a",
+  "bucketName": "veggiestoragebucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE"
+}

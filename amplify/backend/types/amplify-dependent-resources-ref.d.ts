@@ -15,40 +15,15 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "veggiecontentstorage": {
+        "veggiestorage": {
             "BucketName": "string",
             "Region": "string"
-        },
-        "veggietable": {
-            "Name": "string",
-            "Arn": "string",
-            "StreamArn": "string",
-            "PartitionKeyName": "string",
-            "PartitionKeyType": "string",
-            "SortKeyName": "string",
-            "SortKeyType": "string",
-            "Region": "string"
-        }
-    },
-    "function": {
-        "veggielambda": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "veggiescrudlambda": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
         }
     },
     "api": {
-        "veggiesrestapi": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
+        "veggies": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }
