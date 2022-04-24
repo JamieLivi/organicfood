@@ -13,7 +13,7 @@ interface Props {
   navigation: NavigationProp<any>;
 }
 
-const initialId = uuidv4();
+const initialId = () => uuidv4();
 
 const AddItemScreen = (props: Props) => {
   const {popToast} = useContext(ToastContext);
@@ -112,6 +112,7 @@ const AddItemScreen = (props: Props) => {
           setInfo(t);
         }}
       />
+      <Text style={{marginVertical: 10}}>Image</Text>
       <input
         type="file"
         style={{width: '100%', height: 100}}
@@ -132,12 +133,12 @@ export default AddItemScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    maxWidth: 600,
+    maxWidth: 800,
     padding: 5,
     //  justifyContent: 'space-around',
   },
   infotext: {
-    minHeight: 100,
+    minHeight: 200,
   },
   imageinput: {},
 });

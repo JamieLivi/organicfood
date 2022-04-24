@@ -8,10 +8,11 @@ interface Props {
   route: RouteProp<any, any>;
   navigation: NavigationProp<any>;
 }
-const VeggieDetailsScreen = (props: Props) => {
+const VeggieDetailsScreen = ({navigation, route}: Props) => {
+  const id = route.params?.id;
   return (
     <View style={styles.container}>
-      <Text>VeggieDetailsScreen</Text>
+      <Text>{id}</Text>
     </View>
   );
 };

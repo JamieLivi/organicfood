@@ -10,12 +10,7 @@ import {
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useMemo, useState} from 'react';
-import {
-  Provider as PaperProvider,
-  Text,
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperLightTheme,
-} from 'react-native-paper';
+import {Provider as PaperProvider, Text} from 'react-native-paper';
 import VeggieDetailsScreen from './screens/VeggieDetailsScreen';
 import VeggieListScreen from './screens/VeggieListScreen';
 import awsConfig from './aws-exports';
@@ -25,6 +20,7 @@ import AdminStack from './navigation/AdminStack';
 import WebStyles from './utils/WebStyles';
 import ToastState from './context/ToastState';
 import Toast from './components/Toast';
+import {darkTheme, lightTheme} from './utils/theme';
 
 export type RootStackParamList = {
   VeggieList: undefined;
@@ -54,15 +50,13 @@ const Stack = createStackNavigator<RootStackParamList>();
 const App = () => {
   const [theme, setTheme] = useState(DefaultTheme);
   const paperTheme = useMemo(() => {
-    const t = theme.dark ? PaperDarkTheme : PaperLightTheme;
+    const t = theme.dark ? darkTheme : lightTheme;
 
     return {
       ...t,
       colors: {
-        ...t.colors,
         ...theme.colors,
-        surface: theme.colors.card,
-        accent: theme.dark ? 'rgb(255, 55, 95)' : 'rgb(255, 45, 85)',
+        ...t.colors,
       },
     };
   }, [theme.colors, theme.dark]);

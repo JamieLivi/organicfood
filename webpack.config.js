@@ -32,8 +32,8 @@ const compileNodeModules = [
   'aws-amplify-react-native',
   //   'react-native-parsed-text',
   'react-native-vector-icons',
-  //   'react-native-gesture-handler',
-  //   'react-native-reanimated',
+  'react-native-gesture-handler',
+  'react-native-reanimated',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const appDir = fs.realpathSync(process.cwd());
@@ -163,6 +163,7 @@ module.exports = function (webpackEnv) {
                   __dirname,
                   'node_modules/react-native-vector-icons',
                 ),
+                path.resolve(__dirname, 'src/assets/fonts'),
               ],
               use: {
                 loader: 'file-loader',

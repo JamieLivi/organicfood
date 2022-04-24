@@ -6,8 +6,9 @@ import {
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {API} from '@aws-amplify/api';
-import {Button, List, Text} from 'react-native-paper';
+import {ActivityIndicator, Button, List, Text} from 'react-native-paper';
 import isWeb from '../utils/isWeb';
+import VeggieListItem from '../components/VeggieListItem';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -15,40 +16,13 @@ interface Props {
 }
 
 const VeggieListScreen = ({navigation, route}: Props) => {
-  const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await API.get(
-  //         'veggierestapi',
-  //         '/items',
-  //         //     {},
-  //         params,
-  //       );
-  //       console.log('🚀 ~ response', response);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await API.get('veggierestapi', '/items/*', {});
-  //       console.log('🚀 ~ response', response);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  const [data, setData] = useState<any>([]);
+  const [loading, setloading] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
+        setloading(true);
         try {
           const response = await API.get('veggierestapi', '/items/*', {});
           console.log('🚀 ~ response', response);
@@ -56,6 +30,7 @@ const VeggieListScreen = ({navigation, route}: Props) => {
         } catch (err) {
           console.log(err);
         }
+        setloading(false);
       };
       fetchData();
 
@@ -64,16 +39,19 @@ const VeggieListScreen = ({navigation, route}: Props) => {
   );
 
   const renderItem = ({item}) => {
-    const onPress = () => {
-      console.log(item.name);
-      navigation.navigate('VeggieDetails', {id: item.id});
-    };
-    return <List.Item onPress={onPress} title={item.name} />;
+    return <VeggieListItem {...item} />;
   };
   return (
     <>
       <View style={styles.container}>
-        <FlatList data={data} renderItem={renderItem} />
+        <FlatList
+          keyExtractor={i => i.id.toString()}
+          data={data}
+          ListEmptyComponent={
+            <ActivityIndicator style={{paddingVertical: 20}} />
+          }
+          renderItem={renderItem}
+        />
       </View>
       <View>
         {isWeb && (
