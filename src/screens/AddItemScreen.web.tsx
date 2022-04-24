@@ -106,7 +106,7 @@ const AddItemScreen = (props: Props) => {
         label="Info"
         value={info}
         multiline
-        style={{minHeight: 100}}
+        style={styles.infotext}
         //      style={inputStyle}
         onChangeText={t => {
           setInfo(t);
@@ -114,7 +114,7 @@ const AddItemScreen = (props: Props) => {
       />
       <input
         type="file"
-        style={{width: '100%', height: 100}}
+        style={styles.imageinput}
         name="image"
         placeholder="select image"
         accept="image/*"
@@ -135,5 +135,12 @@ const styles = StyleSheet.create({
     maxWidth: 600,
     padding: 5,
     //  justifyContent: 'space-around',
+  },
+  infotext: {
+    minHeight: 100,
+  },
+  imageinput: {
+    width: '100%',
+    height: 100,
   },
 });

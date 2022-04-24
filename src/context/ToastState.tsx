@@ -1,5 +1,5 @@
 import React, {useMemo, useReducer} from 'react';
-import ToastImageContext from './ToastContext';
+import ToastContext from './ToastContext';
 
 type State = {
   toastVisible: boolean;
@@ -8,7 +8,7 @@ type State = {
 
 type Action = {type: 'POP_TOAST'; toastText: string} | {type: 'HIDE_TOAST'};
 
-const ToastImageState = (props: any) => {
+const ToastState = (props: any) => {
   const [state, dispatch] = useReducer<React.Reducer<State, Action>>(
     (prevState, action) => {
       //   console.log('toastimagestate reducer')
@@ -46,10 +46,10 @@ const ToastImageState = (props: any) => {
   );
 
   return (
-    <ToastImageContext.Provider value={contextValue}>
+    <ToastContext.Provider value={contextValue}>
       {props.children}
-    </ToastImageContext.Provider>
+    </ToastContext.Provider>
   );
 };
 
-export default ToastImageState;
+export default ToastState;

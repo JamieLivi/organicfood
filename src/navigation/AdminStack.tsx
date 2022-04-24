@@ -1,18 +1,15 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {Auth} from 'aws-amplify';
 import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import AuthContext from '../context/AuthContext';
 import AddItemScreen from '../screens/AddItemScreen';
 import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import SignInScreen from '../screens/SignInScreen';
 
-interface Props {}
-
 const Stack = createStackNavigator();
 
-const AdminStack = (props: Props) => {
+const AdminStack = () => {
   const [loading, setLoading] = useState(true);
   const [signedIn, setSignedIn] = useState(false);
   const signInValue = useMemo(
@@ -37,6 +34,10 @@ const AdminStack = (props: Props) => {
     };
     getAuthStatus();
   }, []);
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <AuthContext.Provider value={signInValue}>
@@ -67,11 +68,3 @@ const AdminStack = (props: Props) => {
 };
 
 export default AdminStack;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

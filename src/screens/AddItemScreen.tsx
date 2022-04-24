@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 
-const AddItemScreen = (props: Props) => {
+const AddItemScreen = () => {
   return (
     <View style={styles.container}>
       <Text>This functionality is only available through the web app</Text>

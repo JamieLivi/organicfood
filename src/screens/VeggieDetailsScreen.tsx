@@ -2,8 +2,12 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 
-interface Props {}
+import {RouteProp, NavigationProp} from '@react-navigation/native';
 
+interface Props {
+  route: RouteProp<any, any>;
+  navigation: NavigationProp<any>;
+}
 const VeggieDetailsScreen = (props: Props) => {
   return (
     <View style={styles.container}>

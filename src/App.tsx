@@ -29,6 +29,7 @@ import {Amplify} from 'aws-amplify';
 import AdminStack from './navigation/AdminStack';
 import WebStyles from './utils/WebStyles';
 import ToastState from './context/ToastState';
+import Toast from './components/Toast';
 
 export type RootStackParamList = {
   VeggieList: undefined;
@@ -103,6 +104,7 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
+        <Toast />
       </ToastState>
     </PaperProvider>
   );

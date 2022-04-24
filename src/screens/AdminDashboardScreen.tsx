@@ -1,7 +1,7 @@
 import {Auth} from 'aws-amplify';
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {Button, IconButton, List, Text} from 'react-native-paper';
+import {Button, IconButton, List} from 'react-native-paper';
 import AuthContext from '../context/AuthContext';
 import {API} from 'aws-amplify';
 import {listVeggies} from '../graphql/queries';
@@ -37,7 +37,7 @@ const AdminDashboardScreen = (props: Props) => {
     useCallback(() => {
       const getData = async () => {
         try {
-          const {data: vegData} = await API.graphql({query: listVeggies});
+          const {data: vegData}: any = await API.graphql({query: listVeggies});
           setData(vegData?.listVeggies?.items || []);
         } catch (error) {
           console.log('🚀 ~ error', error);
@@ -63,7 +63,7 @@ const AdminDashboardScreen = (props: Props) => {
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}: any) => {
     return (
       <List.Item title={item.name}>
         <IconButton icon="delete" />
@@ -73,8 +73,7 @@ const AdminDashboardScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{flexDirection: 'row', width: '100%', justifyContent: 'center'}}>
+      <View style={styles.buttonContainer}>
         <Button compact onPress={() => props.navigation.navigate('AddItem')}>
           Add Item
         </Button>
@@ -82,7 +81,7 @@ const AdminDashboardScreen = (props: Props) => {
           Sign Out
         </Button>
       </View>
-      <View style={{flex: 1}}>
+      <View style={styles.listcontainer}>
         <FlatList renderItem={renderItem} data={data} />
       </View>
     </View>
@@ -94,5 +93,13 @@ export default AdminDashboardScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  listcontainer: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
   },
 });

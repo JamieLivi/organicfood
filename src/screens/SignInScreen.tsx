@@ -1,17 +1,10 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Text, TextInput, Button} from 'react-native-paper';
+import {TextInput, Button} from 'react-native-paper';
 import {Auth} from '@aws-amplify/auth';
 import AuthContext from '../context/AuthContext';
 
-import {RouteProp, NavigationProp} from '@react-navigation/native';
-
-interface Props {
-  route: RouteProp<any, any>;
-  navigation: NavigationProp<any>;
-}
-
-const SignInScreen = (props: Props) => {
+const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setloading] = useState(false);
@@ -23,7 +16,6 @@ const SignInScreen = (props: Props) => {
       const result = await Auth.signIn(email, password);
       console.log(result);
       setSignedIn(true);
-      //    setAuthStatus('loading')
     } catch (e: any) {
       setloading(false);
       console.log(e);
@@ -35,7 +27,6 @@ const SignInScreen = (props: Props) => {
       <TextInput
         label="Email"
         value={email}
-        //      style={inputStyle}
         onChangeText={t => {
           setEmail(t);
         }}
