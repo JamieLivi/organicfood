@@ -2,38 +2,46 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getVeggie = /* GraphQL */ `
-  query GetVeggie($id: ID!) {
-    getVeggie(id: $id) {
+export const getVeg = /* GraphQL */ `
+  query GetVeg($id: ID!, $updatedAt: String!) {
+    getVeg(id: $id, updatedAt: $updatedAt) {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;
-export const listVeggies = /* GraphQL */ `
-  query ListVeggies(
-    $filter: ModelVeggieFilterInput
+export const listVegs = /* GraphQL */ `
+  query ListVegs(
+    $id: ID
+    $updatedAt: ModelStringKeyConditionInput
+    $filter: ModelVegFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listVeggies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listVegs(
+      id: $id
+      updatedAt: $updatedAt
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name
-        dateAdded
         subtitle
         info
         image
         fact
-        createdAt
         updatedAt
+        createdAt
       }
       nextToken
     }

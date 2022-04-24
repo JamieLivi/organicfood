@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "storage": {
+      "veggiestorage": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Veg:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

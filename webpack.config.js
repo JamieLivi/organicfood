@@ -152,8 +152,6 @@ module.exports = function (webpackEnv) {
                   loader: 'css-loader',
                   options: {
                     modules: true,
-                    // localIdentName:
-                    //   '[path]___[name]__[local]___[hash:base64:5]',
                   },
                 },
               ],
@@ -165,7 +163,6 @@ module.exports = function (webpackEnv) {
                   __dirname,
                   'node_modules/react-native-vector-icons',
                 ),
-                //       path.resolve(__dirname, 'src/assets/fonts'),
               ],
               use: {
                 loader: 'file-loader',

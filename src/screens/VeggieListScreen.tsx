@@ -1,6 +1,11 @@
-import {NavigationProp, RouteProp} from '@react-navigation/native';
-import React from 'react';
+import {
+  NavigationProp,
+  RouteProp,
+  useFocusEffect,
+} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+import {API} from '@aws-amplify/api';
 import {Button, List, Text} from 'react-native-paper';
 import isWeb from '../utils/isWeb';
 
@@ -9,12 +14,55 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const tempData = [
-  {id: 1, name: 'carrot', info: 'root vegetable'},
-  {id: 2, name: 'parsnip', info: 'minging root vegetable'},
-];
-
 const VeggieListScreen = ({navigation, route}: Props) => {
+  const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await API.get(
+  //         'veggierestapi',
+  //         '/items',
+  //         //     {},
+  //         params,
+  //       );
+  //       console.log('🚀 ~ response', response);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await API.get('veggierestapi', '/items/*', {});
+  //       console.log('🚀 ~ response', response);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await API.get('veggierestapi', '/items/*', {});
+          console.log('🚀 ~ response', response);
+          setData([...response]);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchData();
+
+      return () => {};
+    }, []),
+  );
+
   const renderItem = ({item}) => {
     const onPress = () => {
       console.log(item.name);
@@ -25,7 +73,7 @@ const VeggieListScreen = ({navigation, route}: Props) => {
   return (
     <>
       <View style={styles.container}>
-        <FlatList data={tempData} renderItem={renderItem} />
+        <FlatList data={data} renderItem={renderItem} />
       </View>
       <View>
         {isWeb && (

@@ -2,57 +2,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createVeggie = /* GraphQL */ `
-  mutation CreateVeggie(
-    $input: CreateVeggieInput!
-    $condition: ModelVeggieConditionInput
+export const createVeg = /* GraphQL */ `
+  mutation CreateVeg(
+    $input: CreateVegInput!
+    $condition: ModelVegConditionInput
   ) {
-    createVeggie(input: $input, condition: $condition) {
+    createVeg(input: $input, condition: $condition) {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;
-export const updateVeggie = /* GraphQL */ `
-  mutation UpdateVeggie(
-    $input: UpdateVeggieInput!
-    $condition: ModelVeggieConditionInput
+export const updateVeg = /* GraphQL */ `
+  mutation UpdateVeg(
+    $input: UpdateVegInput!
+    $condition: ModelVegConditionInput
   ) {
-    updateVeggie(input: $input, condition: $condition) {
+    updateVeg(input: $input, condition: $condition) {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;
-export const deleteVeggie = /* GraphQL */ `
-  mutation DeleteVeggie(
-    $input: DeleteVeggieInput!
-    $condition: ModelVeggieConditionInput
+export const deleteVeg = /* GraphQL */ `
+  mutation DeleteVeg(
+    $input: DeleteVegInput!
+    $condition: ModelVegConditionInput
   ) {
-    deleteVeggie(input: $input, condition: $condition) {
+    deleteVeg(input: $input, condition: $condition) {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;

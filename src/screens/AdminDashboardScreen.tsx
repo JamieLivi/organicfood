@@ -4,7 +4,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {Button, IconButton, List} from 'react-native-paper';
 import AuthContext from '../context/AuthContext';
 import {API} from 'aws-amplify';
-import {listVeggies} from '../graphql/queries';
+import {listVegs} from '../graphql/queries';
 import {
   RouteProp,
   NavigationProp,
@@ -37,8 +37,10 @@ const AdminDashboardScreen = (props: Props) => {
     useCallback(() => {
       const getData = async () => {
         try {
-          const {data: vegData}: any = await API.graphql({query: listVeggies});
-          setData(vegData?.listVeggies?.items || []);
+          const {data: vegData}: any = await API.graphql({query: listVegs});
+          console.log('🚀 ~ vegData', vegData);
+
+          setData(vegData?.listVegs?.items || []);
         } catch (error) {
           console.log('🚀 ~ error', error);
         }

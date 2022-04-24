@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {API, graphqlOperation} from '@aws-amplify/api';
 import {Storage} from '@aws-amplify/storage';
-import {createVeggie} from '../graphql/mutations';
+import {createVeg} from '../graphql/mutations';
 import {v4 as uuidv4} from 'uuid';
 import ToastContext from '../context/ToastContext';
 import {RouteProp, NavigationProp} from '@react-navigation/native';
@@ -64,7 +64,7 @@ const AddItemScreen = (props: Props) => {
       }
 
       const result = await API.graphql(
-        graphqlOperation(createVeggie, {
+        graphqlOperation(createVeg, {
           input: {
             id: itemId,
             name,
@@ -114,7 +114,7 @@ const AddItemScreen = (props: Props) => {
       />
       <input
         type="file"
-        style={styles.imageinput}
+        style={{width: '100%', height: 100}}
         name="image"
         placeholder="select image"
         accept="image/*"
@@ -139,8 +139,5 @@ const styles = StyleSheet.create({
   infotext: {
     minHeight: 100,
   },
-  imageinput: {
-    width: '100%',
-    height: 100,
-  },
+  imageinput: {},
 });

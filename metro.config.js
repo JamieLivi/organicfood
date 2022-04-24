@@ -5,7 +5,15 @@
  * @format
  */
 
+// const path = require('path');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
+
 module.exports = {
+  resetCache: false,
+  resolver: {
+    platforms: ['ios', 'android'],
+    blacklistRE: exclusionList([/\/amplify\/.*/]),
+  },
   transformer: {
     getTransformOptions: async () => ({
       transform: {

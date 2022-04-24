@@ -2,48 +2,45 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateVeggie = /* GraphQL */ `
-  subscription OnCreateVeggie {
-    onCreateVeggie {
+export const onCreateVeg = /* GraphQL */ `
+  subscription OnCreateVeg {
+    onCreateVeg {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;
-export const onUpdateVeggie = /* GraphQL */ `
-  subscription OnUpdateVeggie {
-    onUpdateVeggie {
+export const onUpdateVeg = /* GraphQL */ `
+  subscription OnUpdateVeg {
+    onUpdateVeg {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;
-export const onDeleteVeggie = /* GraphQL */ `
-  subscription OnDeleteVeggie {
-    onDeleteVeggie {
+export const onDeleteVeg = /* GraphQL */ `
+  subscription OnDeleteVeg {
+    onDeleteVeg {
       id
       name
-      dateAdded
       subtitle
       info
       image
       fact
-      createdAt
       updatedAt
+      createdAt
     }
   }
 `;

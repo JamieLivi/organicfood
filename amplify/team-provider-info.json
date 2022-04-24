@@ -20,6 +20,12 @@
       },
       "auth": {
         "veggiesauth": {}
+      },
+      "function": {
+        "veggierestlambda": {
+          "deploymentBucketName": "amplify-veggies-dev-151427-deployment",
+          "s3Key": "amplify-builds/veggierestlambda-77687154666d45524f33-build.zip"
+        }
       }
     }
   }

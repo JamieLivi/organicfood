@@ -20,10 +20,23 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string"
         }
     },
+    "function": {
+        "veggierestlambda": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
     "api": {
         "veggies": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+        },
+        "veggierestapi": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     }
 }

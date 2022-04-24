@@ -1,9 +1,10 @@
-type Veggie @model {
+type Veg @model @key(fields: ["id", "updatedAt"]) {
   id: ID!
   name: String!
-  dateAdded: String
   subtitle: String
   info: String
   image: String
   fact: String
+  updatedAt: String!
+  createdAt: String
 }

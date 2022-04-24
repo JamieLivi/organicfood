@@ -12,20 +12,20 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../config/env');
+require('../env');
 
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const bfj = require('bfj');
 const webpack = require('webpack');
-const configFactory = require('../webpack.config');
-const paths = require('../config/paths');
-const checkRequiredFiles = require('../config/checkRequiredFiles');
-const formatWebpackMessages = require('../config/formatWebpackMessages');
-const printHostingInstructions = require('../config/printHostingInstructions');
-const FileSizeReporter = require('../config/FileSizeReporter');
-const printBuildError = require('../config/printBuildError');
+const configFactory = require('../../webpack.config');
+const paths = require('../paths');
+const checkRequiredFiles = require('../checkRequiredFiles');
+const formatWebpackMessages = require('../formatWebpackMessages');
+const printHostingInstructions = require('../printHostingInstructions');
+const FileSizeReporter = require('../FileSizeReporter');
+const printBuildError = require('../printBuildError');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -51,7 +51,7 @@ const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const {checkBrowsers} = require('../config/browsersHelper');
+const {checkBrowsers} = require('../browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.

@@ -2,26 +2,27 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateVeggieInput = {
+export type CreateVegInput = {
   id?: string | null,
   name: string,
-  dateAdded?: string | null,
   subtitle?: string | null,
   info?: string | null,
   image?: string | null,
   fact?: string | null,
+  updatedAt?: string | null,
+  createdAt?: string | null,
 };
 
-export type ModelVeggieConditionInput = {
+export type ModelVegConditionInput = {
   name?: ModelStringInput | null,
-  dateAdded?: ModelStringInput | null,
   subtitle?: ModelStringInput | null,
   info?: ModelStringInput | null,
   image?: ModelStringInput | null,
   fact?: ModelStringInput | null,
-  and?: Array< ModelVeggieConditionInput | null > | null,
-  or?: Array< ModelVeggieConditionInput | null > | null,
-  not?: ModelVeggieConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelVegConditionInput | null > | null,
+  or?: Array< ModelVegConditionInput | null > | null,
+  not?: ModelVegConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -64,44 +65,56 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Veggie = {
-  __typename: "Veggie",
+export type Veg = {
+  __typename: "Veg",
   id?: string,
   name?: string,
-  dateAdded?: string | null,
   subtitle?: string | null,
   info?: string | null,
   image?: string | null,
   fact?: string | null,
-  createdAt?: string,
   updatedAt?: string,
+  createdAt?: string | null,
 };
 
-export type UpdateVeggieInput = {
+export type UpdateVegInput = {
   id: string,
   name?: string | null,
-  dateAdded?: string | null,
   subtitle?: string | null,
   info?: string | null,
   image?: string | null,
   fact?: string | null,
+  updatedAt: string,
+  createdAt?: string | null,
 };
 
-export type DeleteVeggieInput = {
+export type DeleteVegInput = {
   id: string,
+  updatedAt: string,
 };
 
-export type ModelVeggieFilterInput = {
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export type ModelVegFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  dateAdded?: ModelStringInput | null,
   subtitle?: ModelStringInput | null,
   info?: ModelStringInput | null,
   image?: ModelStringInput | null,
   fact?: ModelStringInput | null,
-  and?: Array< ModelVeggieFilterInput | null > | null,
-  or?: Array< ModelVeggieFilterInput | null > | null,
-  not?: ModelVeggieFilterInput | null,
+  updatedAt?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelVegFilterInput | null > | null,
+  or?: Array< ModelVegFilterInput | null > | null,
+  not?: ModelVegFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -120,157 +133,159 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelVeggieConnection = {
-  __typename: "ModelVeggieConnection",
-  items?:  Array<Veggie | null >,
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelVegConnection = {
+  __typename: "ModelVegConnection",
+  items?:  Array<Veg | null >,
   nextToken?: string | null,
 };
 
-export type CreateVeggieMutationVariables = {
-  input?: CreateVeggieInput,
-  condition?: ModelVeggieConditionInput | null,
+export type CreateVegMutationVariables = {
+  input?: CreateVegInput,
+  condition?: ModelVegConditionInput | null,
 };
 
-export type CreateVeggieMutation = {
-  createVeggie?:  {
-    __typename: "Veggie",
+export type CreateVegMutation = {
+  createVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type UpdateVeggieMutationVariables = {
-  input?: UpdateVeggieInput,
-  condition?: ModelVeggieConditionInput | null,
+export type UpdateVegMutationVariables = {
+  input?: UpdateVegInput,
+  condition?: ModelVegConditionInput | null,
 };
 
-export type UpdateVeggieMutation = {
-  updateVeggie?:  {
-    __typename: "Veggie",
+export type UpdateVegMutation = {
+  updateVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type DeleteVeggieMutationVariables = {
-  input?: DeleteVeggieInput,
-  condition?: ModelVeggieConditionInput | null,
+export type DeleteVegMutationVariables = {
+  input?: DeleteVegInput,
+  condition?: ModelVegConditionInput | null,
 };
 
-export type DeleteVeggieMutation = {
-  deleteVeggie?:  {
-    __typename: "Veggie",
+export type DeleteVegMutation = {
+  deleteVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type GetVeggieQueryVariables = {
+export type GetVegQueryVariables = {
   id?: string,
+  updatedAt?: string,
 };
 
-export type GetVeggieQuery = {
-  getVeggie?:  {
-    __typename: "Veggie",
+export type GetVegQuery = {
+  getVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type ListVeggiesQueryVariables = {
-  filter?: ModelVeggieFilterInput | null,
+export type ListVegsQueryVariables = {
+  id?: string | null,
+  updatedAt?: ModelStringKeyConditionInput | null,
+  filter?: ModelVegFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
-export type ListVeggiesQuery = {
-  listVeggies?:  {
-    __typename: "ModelVeggieConnection",
+export type ListVegsQuery = {
+  listVegs?:  {
+    __typename: "ModelVegConnection",
     items:  Array< {
-      __typename: "Veggie",
+      __typename: "Veg",
       id: string,
       name: string,
-      dateAdded?: string | null,
       subtitle?: string | null,
       info?: string | null,
       image?: string | null,
       fact?: string | null,
-      createdAt: string,
       updatedAt: string,
+      createdAt?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
-export type OnCreateVeggieSubscription = {
-  onCreateVeggie?:  {
-    __typename: "Veggie",
+export type OnCreateVegSubscription = {
+  onCreateVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type OnUpdateVeggieSubscription = {
-  onUpdateVeggie?:  {
-    __typename: "Veggie",
+export type OnUpdateVegSubscription = {
+  onUpdateVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };
 
-export type OnDeleteVeggieSubscription = {
-  onDeleteVeggie?:  {
-    __typename: "Veggie",
+export type OnDeleteVegSubscription = {
+  onDeleteVeg?:  {
+    __typename: "Veg",
     id: string,
     name: string,
-    dateAdded?: string | null,
     subtitle?: string | null,
     info?: string | null,
     image?: string | null,
     fact?: string | null,
-    createdAt: string,
     updatedAt: string,
+    createdAt?: string | null,
   } | null,
 };

@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../config/env');
+require('../env');
 const fs = require('fs');
 const chalk = require('chalk');
 const webpack = require('webpack');
@@ -22,10 +22,10 @@ const {
   createCompiler,
   prepareProxy,
   prepareUrls,
-} = require('../config/WebpackDevServerUtils');
-const paths = require('../config/paths');
-const configFactory = require('../webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+} = require('../WebpackDevServerUtils');
+const paths = require('../paths');
+const configFactory = require('../../webpack.config');
+const createDevServerConfig = require('../webpackDevServer.config');
 const useYarn = fs.existsSync(paths.yarnLockFile);
 
 // Tools like Cloud9 rely on this.
