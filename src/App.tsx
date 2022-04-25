@@ -21,6 +21,7 @@ import WebStyles from './utils/WebStyles';
 import ToastState from './context/ToastState';
 import Toast from './components/Toast';
 import {darkTheme, lightTheme} from './utils/theme';
+import ItemState from './context/ItemState';
 
 export type RootStackParamList = {
   VeggieList: undefined;
@@ -66,37 +67,57 @@ const App = () => {
   return (
     <PaperProvider theme={paperTheme}>
       <WebStyles />
-      <ToastState>
-        <NavigationContainer
-          fallback={<Text>Loading…</Text>}
-          documentTitle={{
-            formatter: (options, route) =>
-              `${options?.title ?? route?.name} - Interesting Veggies`,
-          }}
-          ref={navigationRef}
-          theme={theme}>
-          <Stack.Navigator initialRouteName="VeggieList">
-            <Stack.Screen
-              name="VeggieList"
-              options={{title: 'Veggies'}}
-              component={VeggieListScreen}
-            />
-            <Stack.Screen
-              name="VeggieDetails"
-              options={{title: 'Details'}}
-              component={VeggieDetailsScreen}
-            />
-            {isWeb && (
+      <ItemState>
+        <ToastState>
+          <NavigationContainer
+            linking={{
+              prefixes: ['veggies://'],
+              config: {
+                screens: {
+                  VeggieList: '',
+                  VeggieDetails: 'details',
+                  Admin: {
+                    screens: {
+                      SignIn: 'signin',
+                      Dashboard: 'dashboard',
+                      AddItem: 'add',
+                    },
+                  },
+                },
+              },
+            }}
+            fallback={<Text>Loading…</Text>}
+            documentTitle={{
+              formatter: (options, route) =>
+                `${options?.title ?? route?.name} - Interesting Veggies`,
+            }}
+            ref={navigationRef}
+            theme={theme}>
+            <Stack.Navigator
+              screenOptions={{headerBackTitleVisible: false}}
+              initialRouteName="VeggieList">
               <Stack.Screen
-                name="Admin"
-                options={{title: 'Admin', headerShown: false}}
-                component={AdminStack}
+                name="VeggieList"
+                options={{title: 'Veggies', headerShown: false}}
+                component={VeggieListScreen}
               />
-            )}
-          </Stack.Navigator>
-        </NavigationContainer>
-        <Toast />
-      </ToastState>
+              <Stack.Screen
+                name="VeggieDetails"
+                options={{title: 'Details'}}
+                component={VeggieDetailsScreen}
+              />
+              {isWeb && (
+                <Stack.Screen
+                  name="Admin"
+                  options={{title: 'Admin', headerShown: false}}
+                  component={AdminStack}
+                />
+              )}
+            </Stack.Navigator>
+          </NavigationContainer>
+          <Toast />
+        </ToastState>
+      </ItemState>
     </PaperProvider>
   );
 };

@@ -20,96 +20,24 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 AWS.config.update({region: process.env.TABLE_REGION});
-
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 let tableName = process.env.API_VEGGIES_VEGTABLE_NAME;
-const partitionKeyName = 'id';
-const partitionKeyType = 'S';
-const sortKeyName = 'updatedAt';
-const sortKeyType = 'S';
-const hasSortKey = sortKeyName !== '';
-const path = '/items';
-const UNAUTH = 'UNAUTH';
-const hashKeyPath = '/:' + partitionKeyName;
-const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
-
-// declare a new express app
 const app = express();
 app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 
-// Enable CORS for all methods
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
   next();
 });
 
-const convertUrlType = (param, type) => {
-  switch (type) {
-    case 'N':
-      return Number.parseInt(param);
-    default:
-      return param;
-  }
-};
-
-/**********************
- * Example get method *
- *
- *
- **********************/
-
-// app.get(path + hashKeyPath, function (req, res) {
-// console.log("🚀 ~ req1", req)
-
-//   const condition = {};
-//   condition[partitionKeyName] = {
-//     ComparisonOperator: 'EQ',
-//   };
-
-//   try {
-//     condition[partitionKeyName]['AttributeValueList'] = [
-//       convertUrlType(req.params[partitionKeyName], partitionKeyType),
-//     ];
-//   } catch (err) {
-//     res.statusCode = 500;
-//     res.json({error: 'Wrong column type ' + err});
-//   }
-
-//   let queryParams = {
-//     TableName: tableName,
-//     KeyConditions: condition,
-//   };
-
-//   dynamodb.query(queryParams, (err, data) => {
-//   console.log("🚀 ~ data", data)
-//   console.log("🚀 ~ err", err)
-
-//     if (err) {
-//       res.statusCode = 500;
-//       res.json({error: 'Could not load items: ' + err});
-//     } else {
-//       res.json(data.Items);
-//     }
-//   });
-// });
-
 app.get('/items/*', function (req, res) {
-  console.log('🚀 ~ req', req);
-
-  // Add your code here
   let queryParams = {
     TableName: tableName,
   };
-  console.log('incoming', req);
-  // Add your code here
-  // res.json({success: 'get call succeed!', url: req.url});
   dynamodb.scan(queryParams, (err, data) => {
-    console.log('🚀 ~ data2', data);
-    console.log('🚀 ~ err2', err);
-    console.log('🚀 ~ queryParams', queryParams);
     if (err) {
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err});
@@ -119,53 +47,8 @@ app.get('/items/*', function (req, res) {
   });
 });
 
-/****************************
- * Example post method *
- ****************************/
-
-app.post('/items', function (req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body});
-});
-
-app.post('/items/*', function (req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body});
-});
-
-/****************************
- * Example put method *
- ****************************/
-
-app.put('/items', function (req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body});
-});
-
-app.put('/items/*', function (req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body});
-});
-
-/****************************
- * Example delete method *
- ****************************/
-
-app.delete('/items', function (req, res) {
-  // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
-});
-
-app.delete('/items/*', function (req, res) {
-  // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
-});
-
 app.listen(3000, function () {
   console.log('App started');
 });
 
-// Export the app object. When executing the application local this does nothing. However,
-// to port it to AWS Lambda we will create a wrapper around that will load the app from
-// this file
 module.exports = app;

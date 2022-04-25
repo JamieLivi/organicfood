@@ -25,6 +25,7 @@ const AddItemScreen = (props: Props) => {
   const [loading, setloading] = useState(false);
 
   const clearInputs = () => {
+    setItemId('');
     setName('');
     setSubtitle('');
     setInfo('');
@@ -102,16 +103,18 @@ const AddItemScreen = (props: Props) => {
           setSubtitle(t);
         }}
       />
-      <TextInput
-        label="Info"
-        value={info}
-        multiline
-        style={styles.infotext}
-        //      style={inputStyle}
-        onChangeText={t => {
-          setInfo(t);
-        }}
-      />
+      <View style={styles.infotextContainer}>
+        <TextInput
+          label="Info"
+          value={info}
+          multiline
+          style={styles.infotext}
+          //      style={inputStyle}
+          onChangeText={t => {
+            setInfo(t);
+          }}
+        />
+      </View>
       <Text style={{marginVertical: 10}}>Image</Text>
       <input
         type="file"
@@ -137,8 +140,13 @@ const styles = StyleSheet.create({
     padding: 5,
     //  justifyContent: 'space-around',
   },
+  infotextContainer: {
+    minHeight: 250,
+  },
   infotext: {
-    minHeight: 200,
+    //  minHeight: 200,
+    flex: 1,
+    height: '100%',
   },
   imageinput: {},
 });

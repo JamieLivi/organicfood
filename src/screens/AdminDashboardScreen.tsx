@@ -88,6 +88,7 @@ const AdminDashboardScreen = (props: Props) => {
         console.log('🚀 ~ error', error);
       }
     };
+    const onPressEdit = () => {};
     return (
       <List.Item
         left={props => (
@@ -102,10 +103,15 @@ const AdminDashboardScreen = (props: Props) => {
         descriptionNumberOfLines={20}
         // description={lorem2}
         description={`${item.subtitle}\n\n${item.info}`}
-        right={props => (
-          <TouchableOpacity onPress={onPressBin}>
-            <List.Icon {...props} icon="delete" />
-          </TouchableOpacity>
+        right={(itemProps: any) => (
+          <>
+            <TouchableOpacity onPress={onPressBin}>
+              <List.Icon {...itemProps} icon="delete" />
+            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={onPressEdit}>
+              <List.Icon {...itemProps} icon="pencil" />
+            </TouchableOpacity> */}
+          </>
         )}
       />
     );
@@ -114,10 +120,18 @@ const AdminDashboardScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button compact onPress={() => props.navigation.navigate('AddItem')}>
+        <Button
+          mode="contained"
+          compact
+          style={{marginRight: 5}}
+          onPress={() => props.navigation.navigate('AddItem')}>
           Add Item
         </Button>
-        <Button compact loading={loading} onPress={onPressSignOut}>
+        <Button
+          mode="contained"
+          compact
+          loading={loading}
+          onPress={onPressSignOut}>
           Sign Out
         </Button>
       </View>
@@ -141,5 +155,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
+    paddingTop: 8,
   },
 });
