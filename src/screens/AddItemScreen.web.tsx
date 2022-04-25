@@ -31,8 +31,7 @@ const AddItemScreen = (props: Props) => {
     setInfo('');
   };
 
-  const onChangeImage = async e => {
-    console.log('🚀 ~ e', e);
+  const onChangeImage = async (e: any) => {
     const {assets, target} = e || {};
     let asset;
     let resUri;
@@ -90,7 +89,6 @@ const AddItemScreen = (props: Props) => {
       <TextInput
         label="Name"
         value={name}
-        //      style={inputStyle}
         onChangeText={t => {
           setName(t);
         }}
@@ -98,7 +96,6 @@ const AddItemScreen = (props: Props) => {
       <TextInput
         label="Subtitle"
         value={subtitle}
-        //      style={inputStyle}
         onChangeText={t => {
           setSubtitle(t);
         }}
@@ -109,13 +106,12 @@ const AddItemScreen = (props: Props) => {
           value={info}
           multiline
           style={styles.infotext}
-          //      style={inputStyle}
           onChangeText={t => {
             setInfo(t);
           }}
         />
       </View>
-      <Text style={{marginVertical: 10}}>Image</Text>
+      <Text style={styles.mv10}>Image</Text>
       <input
         type="file"
         style={{width: '100%', height: 100}}
@@ -138,15 +134,15 @@ const styles = StyleSheet.create({
     flex: 1,
     maxWidth: 800,
     padding: 5,
-    //  justifyContent: 'space-around',
   },
   infotextContainer: {
     minHeight: 250,
   },
   infotext: {
-    //  minHeight: 200,
     flex: 1,
     height: '100%',
   },
-  imageinput: {},
+  mv10: {
+    marginVertical: 10,
+  },
 });

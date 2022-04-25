@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   NavigationProp,
   RouteProp,
   useFocusEffect,
 } from '@react-navigation/native';
 import React, {useCallback, useContext, useState} from 'react';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {API} from '@aws-amplify/api';
 import {ActivityIndicator, Button, Divider} from 'react-native-paper';
 import isWeb from '../utils/isWeb';
@@ -32,7 +33,6 @@ const VeggieListScreen = ({navigation}: Props) => {
         setloading(true);
         try {
           const response = await API.get('veggierestapi', '/items/*', {});
-          console.log('🚀 ~ response', response);
           setData([...response]);
         } catch (err) {
           console.log(err);
@@ -44,6 +44,10 @@ const VeggieListScreen = ({navigation}: Props) => {
       return () => {};
     }, []),
   );
+
+  const renderListHeader = () => <View style={styles.header} />;
+
+  const renderListFooter = () => <View style={styles.footer} />;
 
   const renderItem = ({item}: {item: Veg}) => {
     return <VeggieListItem {...item} />;
@@ -65,17 +69,12 @@ const VeggieListScreen = ({navigation}: Props) => {
           keyExtractor={i => i.id.toString()}
           ItemSeparatorComponent={() => <Divider style={styles.divider} />}
           data={data}
+          showsVerticalScrollIndicator={false}
           ListEmptyComponent={
             <ActivityIndicator animating={loading} style={styles.spinner} />
           }
-          ListHeaderComponent={() => (
-            <View style={styles.logoContainer}>
-              <Image
-                style={styles.logo}
-                source={require('../assets/images/logo.png')}
-              />
-            </View>
-          )}
+          ListHeaderComponent={renderListHeader}
+          ListFooterComponent={renderListFooter}
           renderItem={renderItem}
         />
       </View>
@@ -88,9 +87,8 @@ export default VeggieListScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 4,
+    paddingHorizontal: 12,
     paddingBottom: isWeb ? 20 : 0,
-    //  paddingTop: statusBarHeight,
   },
   logoContainer: {
     alignItems: 'center',
@@ -99,7 +97,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 50,
-    marginTop: statusBarHeight,
+    marginTop: statusBarHeight * 0.5,
   },
   listContainer: {
     flex: 1,
@@ -116,5 +114,12 @@ const styles = StyleSheet.create({
   },
   spinner: {
     paddingVertical: 20,
+  },
+  header: {
+    width: '100%',
+    height: 8,
+  },
+  footer: {
+    margin: 20,
   },
 });

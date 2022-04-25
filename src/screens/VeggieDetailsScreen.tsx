@@ -20,8 +20,8 @@ const VeggieDetailsScreen = ({navigation, route}: Props) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <Title>{name}</Title>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Title style={styles.title}>{name}</Title>
         <Subheading>{subtitle}</Subheading>
         <View style={styles.imageContainer}>
           <Image
@@ -42,9 +42,12 @@ export default VeggieDetailsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    paddingHorizontal: 12,
   },
   imageContainer: {
+    marginTop: 10,
+  },
+  title: {
     marginTop: 10,
   },
   image: {
@@ -55,5 +58,6 @@ const styles = StyleSheet.create({
     margin: 2,
     marginRight: 10,
     marginTop: 20,
+    marginBottom: 40,
   },
 });

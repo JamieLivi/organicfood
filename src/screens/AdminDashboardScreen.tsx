@@ -1,7 +1,7 @@
 import {Auth, graphqlOperation} from 'aws-amplify';
 import React, {useCallback, useContext, useState} from 'react';
 import {FlatList, Image, StyleSheet, View} from 'react-native';
-import {Button, IconButton, List} from 'react-native-paper';
+import {Button, List} from 'react-native-paper';
 import AuthContext from '../context/AuthContext';
 import {API} from 'aws-amplify';
 import {listVegs} from '../graphql/queries';
@@ -13,7 +13,6 @@ import {
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {deleteVeg} from '../graphql/mutations';
 import ToastContext from '../context/ToastContext';
-import {lorem2} from '../utils/utilities';
 
 interface Props {
   route: RouteProp<any, any>;
@@ -26,32 +25,18 @@ const AdminDashboardScreen = (props: Props) => {
   const {setSignedIn} = useContext(AuthContext);
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const {data: vegData} = await API.graphql({query: listVeggies});
-  //       setData(vegData?.listVeggies?.items || []);
-  //     } catch (error) {
-  //       console.log('🚀 ~ error', error);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
-
   useFocusEffect(
     useCallback(() => {
       const getData = async () => {
         try {
           const {data: vegData}: any = await API.graphql({query: listVegs});
           console.log('🚀 ~ vegData', vegData);
-
           setData(vegData?.listVegs?.items || []);
         } catch (error) {
           console.log('🚀 ~ error', error);
         }
       };
       getData();
-
       return () => {};
     }, []),
   );
@@ -88,20 +73,23 @@ const AdminDashboardScreen = (props: Props) => {
         console.log('🚀 ~ error', error);
       }
     };
-    const onPressEdit = () => {};
+
+    // const onPressEdit = () => {};
+
+    const renderImage = () => (
+      <Image
+        source={{
+          uri: `https://veggiestoragebucket151427-dev.s3.eu-west-1.amazonaws.com/public/${item.id}.jpeg`,
+        }}
+        style={styles.image}
+      />
+    );
+
     return (
       <List.Item
-        left={props => (
-          <Image
-            source={{
-              uri: `https://veggiestoragebucket151427-dev.s3.eu-west-1.amazonaws.com/public/${item.id}.jpeg`,
-            }}
-            style={{width: 100, height: 100, marginRight: 10}}
-          />
-        )}
+        left={renderImage}
         title={item.name}
         descriptionNumberOfLines={20}
-        // description={lorem2}
         description={`${item.subtitle}\n\n${item.info}`}
         right={(itemProps: any) => (
           <>
@@ -123,7 +111,7 @@ const AdminDashboardScreen = (props: Props) => {
         <Button
           mode="contained"
           compact
-          style={{marginRight: 5}}
+          style={styles.mr5}
           onPress={() => props.navigation.navigate('AddItem')}>
           Add Item
         </Button>
@@ -156,5 +144,13 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingTop: 8,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+  },
+  mr5: {
+    marginRight: 5,
   },
 });

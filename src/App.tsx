@@ -8,9 +8,9 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, StackHeaderProps} from '@react-navigation/stack';
 import React, {useMemo, useState} from 'react';
-import {Provider as PaperProvider, Text} from 'react-native-paper';
+import {Appbar, Provider as PaperProvider, Text} from 'react-native-paper';
 import VeggieDetailsScreen from './screens/VeggieDetailsScreen';
 import VeggieListScreen from './screens/VeggieListScreen';
 import awsConfig from './aws-exports';
@@ -22,6 +22,7 @@ import ToastState from './context/ToastState';
 import Toast from './components/Toast';
 import {darkTheme, lightTheme} from './utils/theme';
 import ItemState from './context/ItemState';
+import {Image, StyleSheet, View} from 'react-native';
 
 export type RootStackParamList = {
   VeggieList: undefined;
@@ -36,9 +37,6 @@ declare global {
   }
 }
 
-// Amplify.configure(awsConfig);
-// Auth.configure(awsConfig);
-
 Amplify.configure({
   ...awsConfig,
   Analytics: {
@@ -48,8 +46,26 @@ Amplify.configure({
 
 const Stack = createStackNavigator<RootStackParamList>();
 
+const Header = (props: StackHeaderProps) => {
+  const title =
+    props.options?.title && props.options.title !== 'Veggies'
+      ? props.options.title
+      : 'Interesting Veggies';
+  return (
+    <Appbar.Header>
+      {props.back ? (
+        <Appbar.BackAction onPress={props.navigation.goBack} />
+      ) : (
+        <View />
+      )}
+      <Appbar.Content title={title} />
+      <Image style={styles.logo} source={require('./assets/images/logo.png')} />
+    </Appbar.Header>
+  );
+};
+
 const App = () => {
-  const [theme, setTheme] = useState(DefaultTheme);
+  const [theme] = useState(DefaultTheme);
   const paperTheme = useMemo(() => {
     const t = theme.dark ? darkTheme : lightTheme;
 
@@ -94,11 +110,16 @@ const App = () => {
             ref={navigationRef}
             theme={theme}>
             <Stack.Navigator
-              screenOptions={{headerBackTitleVisible: false}}
+              screenOptions={{
+                headerBackTitleVisible: false,
+                header: headerProps => <Header {...headerProps} />,
+              }}
               initialRouteName="VeggieList">
               <Stack.Screen
                 name="VeggieList"
-                options={{title: 'Veggies', headerShown: false}}
+                options={{
+                  title: 'Veggies',
+                }}
                 component={VeggieListScreen}
               />
               <Stack.Screen
@@ -123,3 +144,12 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  logo: {
+    height: 35,
+    width: 35,
+    borderRadius: 35,
+    marginRight: 8,
+  },
+});
