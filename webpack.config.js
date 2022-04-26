@@ -14,23 +14,16 @@ const appDirectory = path.resolve(__dirname);
 const nodeModuleImages = [
   '@react-navigation/elements',
   'react-native-paper',
-  'aws-amplify-react-native',
   // ...additional
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const nodeModulesMjs = [
   '@aws-amplify',
-  //   'aws-appsync',
-  //   'aws-appsync-auth-link',
   // ...additional
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const compileNodeModules = [
-  //   'react-native-lightbox',
   '@aws-amplify',
-  'aws-amplify',
-  'aws-amplify-react-native',
-  //   'react-native-parsed-text',
   'react-native-vector-icons',
   'react-native-gesture-handler',
   'react-native-reanimated',
@@ -62,17 +55,13 @@ module.exports = function (webpackEnv) {
 
   let plugins = [
     'react-native-web',
-    // 'react-native-paper/babel',
+    'react-native-paper/babel',
     //  'transform-remove-console',
   ];
 
   if (isEnvProduction) {
     plugins.push('transform-remove-console');
   }
-
-  const consolePlugin = isEnvProduction
-    ? 'transform-remove-console'
-    : undefined;
 
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
@@ -112,10 +101,8 @@ module.exports = function (webpackEnv) {
     resolve: {
       modules: ['node_modules', appNodeModules],
       extensions: moduleFileExtensions.map(ext => `.${ext}`),
-      //   .filter((ext) => useTypeScript || !ext.includes("ts")),
       alias: {
         'react-native': 'react-native-web',
-        // recyclerlistview: 'recyclerlistview/web',
         ...(modules.webpackAliases || {}),
       },
       plugins: [PnpWebpackPlugin],
