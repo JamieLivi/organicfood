@@ -2,7 +2,9 @@
 
 ### Showcase React Native project
 
-Fullstack react native app I made over a weekend with both a GraphQL and a Rest API at the backend.
+Fullstack react native app (iPhone, Android and web) I made over a weekend with both a GraphQL and a Rest API at the backend.
+
+<img src="Screenshot.png" alt="screenshot" width="500"/>
 
 - Demo (uses react-native-web): https://dev.d1uzshmek9lg0p.amplifyapp.com/
 - iPhone - https://apps.apple.com/us/app/interesting-veggies/id1620671791

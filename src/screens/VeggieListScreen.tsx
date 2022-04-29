@@ -6,13 +6,13 @@ import {
 } from '@react-navigation/native';
 import React, {useCallback, useContext, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {API} from '@aws-amplify/api';
 import {ActivityIndicator, Button, Divider} from 'react-native-paper';
 import isWeb from '../utils/isWeb';
 import VeggieListItem from '../components/VeggieListItem';
 import ItemContext from '../context/ItemContext';
 import {Veg} from '../API';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
+import axios from 'axios';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -32,8 +32,10 @@ const VeggieListScreen = ({navigation}: Props) => {
       const fetchData = async () => {
         setloading(true);
         try {
-          const response = await API.get('veggierestapi', '/items/*', {});
-          setData([...response]);
+          const response = await axios.get(
+            'https://gqaqcdboij.execute-api.eu-west-1.amazonaws.com/dev/items/*',
+          );
+          response?.data?.length && setData([...response.data]);
         } catch (err) {
           console.log(err);
         }

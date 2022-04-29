@@ -11,6 +11,7 @@ interface Props extends Veg {}
 const VeggieListItem = ({name = '', id, subtitle, info}: Props) => {
   const navigation = useNavigation();
   const {setId, setName, setSubtitle, setInfo} = useContext(ItemContext);
+
   const onPress = () => {
     setName(name);
     setId(id);

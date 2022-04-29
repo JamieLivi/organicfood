@@ -56,14 +56,12 @@ const AddItemScreen = (props: Props) => {
         const response = await fetch(imageUri);
         const blob = await response.blob();
         const file = `${itemId}.jpeg`;
-        const storageResponse: any = await Storage.put(file, blob, {
+        await Storage.put(file, blob, {
           contentType: 'image/jpeg',
           level: 'public',
         });
-        console.log('🚀 ~ storageResponse', storageResponse);
       }
-
-      const result = await API.graphql(
+      await API.graphql(
         graphqlOperation(createVeg, {
           input: {
             id: itemId,
@@ -74,7 +72,6 @@ const AddItemScreen = (props: Props) => {
           },
         }),
       );
-      console.log('🚀 ~ result', result);
       popToast('success!');
       setloading(false);
       clearInputs();

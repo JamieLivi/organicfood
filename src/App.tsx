@@ -31,7 +31,6 @@ export type RootStackParamList = {
 };
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }
@@ -50,13 +49,13 @@ const Header = (props: StackHeaderProps) => {
   const title =
     props.options?.title && props.options.title !== 'Veggies'
       ? props.options.title
-      : 'Interesting Veggies';
+      : 'Veggies!';
   return (
     <Appbar.Header>
       {props.back ? (
         <Appbar.BackAction onPress={props.navigation.goBack} />
       ) : (
-        <View />
+        <View style={{width: 35}} />
       )}
       <Appbar.Content title={title} />
       <Image style={styles.logo} source={require('./assets/images/logo.png')} />

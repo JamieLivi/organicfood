@@ -34,6 +34,7 @@ const AdminDashboardScreen = (props: Props) => {
           setData(vegData?.listVegs?.items || []);
         } catch (error) {
           console.log('🚀 ~ error', error);
+          //      popToast(error?.message )
         }
       };
       getData();
