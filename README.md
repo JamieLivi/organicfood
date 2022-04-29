@@ -4,9 +4,9 @@
 
 Fullstack react native app I made over a weekend with both a GraphQL and a Rest API at the backend.
 
-Demo (uses react-native-web): https://dev.d1uzshmek9lg0p.amplifyapp.com/
-iPhone - https://apps.apple.com/us/app/interesting-veggies/id1620671791
-Android - https://play.google.com/store/apps/details?id=com.food.organic
+- Demo (uses react-native-web): https://dev.d1uzshmek9lg0p.amplifyapp.com/
+- iPhone - https://apps.apple.com/us/app/interesting-veggies/id1620671791
+- Android - https://play.google.com/store/apps/details?id=com.food.organic
 
 #### Features
 
