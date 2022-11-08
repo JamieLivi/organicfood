@@ -2,6 +2,10 @@
   "name": "organicfood",
   "version": "0.0.1",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamieLivi/organicfood"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -17,7 +21,12 @@
     "nukeRNcache": "rm -rf $TMPDIR/react-*",
     "nukePods": "rm -rf ios/Pods",
     "nukeWatchmanCache": "watchman watch-del-all",
-    "nukeYarnCache": "yarn cache clean"
+    "nukeYarnCache": "yarn cache clean",
+    "release": "np --no-publish",
+    "postversion": "react-native-version"
+  },
+  "np": {
+    "tests": false
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -79,8 +88,10 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.67.0",
+    "np": "^7.6.2",
     "pnp-webpack-plugin": "^1.7.0",
     "react-error-overlay": "^6.0.11",
+    "react-native-version": "^4.0.0",
     "react-test-renderer": "17.0.2",
     "style-loader": "^3.3.1",
     "typescript": "^4.4.4",
